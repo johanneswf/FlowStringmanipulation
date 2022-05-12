@@ -104,7 +104,7 @@ namespace FlowStringmanipulation
                 uint ålderUint = ValideraUINT("Ålder på besökare: "); //Vi ser först till att användarens input är ett positiv heltal.
                 if (ålderUint < 5) //Sen matchar vi åldern med if-satser och returnerar priset från konstanterna ovan.
                 {
-                    Console.WriteLine($"Barn under 5 år går gratis");
+                    Console.WriteLine($"Barn under 5 år går gratis"); // Vi skulle kunna använda åldersUint i strängen istället för att hardcoda.
                     return barnPris;
                 }
                 else if (ålderUint > 100)
