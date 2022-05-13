@@ -42,7 +42,7 @@ namespace FlowStringmanipulation
                         // helt annat så vi kompromissar med att döpa detta val till 1b.
                         Console.Clear();
                         Console.WriteLine("Köp biljetter för sällskap");
-                        Sällskap(ValideraUINT("Antal besökare: "));
+                        Sällskap(ValideraUINT("Antal besökare"));
                         VäntaPåAnvändare();
                         break;
 
@@ -101,7 +101,7 @@ namespace FlowStringmanipulation
                                           // använda || i if-satsen men detta känns tydligare.
             do
             {
-                uint ålderUint = ValideraUINT("Ålder på besökare: "); //Vi ser först till att användarens input är ett positiv heltal.
+                uint ålderUint = ValideraUINT("Ålder på besökare"); //Vi ser först till att användarens input är ett positiv heltal.
                 if (ålderUint < 5) //Sen matchar vi åldern med if-satser och returnerar priset från konstanterna ovan.
                 {
                     Console.WriteLine($"Barn under 5 år går gratis"); // Vi skulle kunna använda åldersUint i strängen istället för att hardcoda.
@@ -148,7 +148,7 @@ namespace FlowStringmanipulation
         {
             do
             {
-                Console.Write(inputBuffer);
+                Console.Write($"{inputBuffer}: ");
                 if (uint.TryParse(Console.ReadLine(), out uint output))
                 //TryParse returerar en sann boolean om dess input är ett positiv heltal
                 {
