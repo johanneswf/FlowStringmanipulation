@@ -50,7 +50,7 @@ namespace FlowStringmanipulation
                         Console.WriteLine("Skriv in något du vill upprepa 10 gånger");
                         Console.Write("Upprepa: ");
                         string upprepa = Console.ReadLine();
-                        uint upprepningar = 0;
+                        int upprepningar = 0;
                         while (upprepningar < 10)
                         //En loop som lägger till ett heltal i variabeln varje varv tills vi når 9
                         //(börjar räkna från 0 så det blir 10 loopar)
@@ -88,16 +88,16 @@ namespace FlowStringmanipulation
             } while (run);
         }
 
-        static uint KöpBiljett()
+        static int KöpBiljett()
         //En metod för att köpa biljetter. Den returnerar kostnaden för biljetten så att vi kan använda den
         //som input i en annan metod, metoden Sällskap där vi sammanslår priset för flera biljetter.
         {
             //Eftersom dessa värden inte behöver vara ändringsbara/variabla i programmet kan vi deklarera dem som konstanter.
-            const uint ungdomsPris = 80;
-            const uint pensionärsPris = 90;
-            const uint standardPris = 120;
-            const uint barnPris = 0;
-            const uint näraDödenPris = 0; // Vi skulle kunna slå ihop denna med barnPris och
+            const int ungdomsPris = 80;
+            const int pensionärsPris = 90;
+            const int standardPris = 120;
+            const int barnPris = 0;
+            const int näraDödenPris = 0; // Vi skulle kunna slå ihop denna med barnPris och
                                           // använda || i if-satsen men detta känns tydligare.
             do
             {
@@ -133,7 +133,7 @@ namespace FlowStringmanipulation
         static void Sällskap(uint input)
         //Metoden tar emot hur många biljetter som ska köpas, visar detta för kunden tillsammans med kostnaden för alla biljetterna.
         {
-            uint summa = 0;
+            int summa = 0;
             //Vi kan jobba direkt i en heltalsvariabel eftersom vi inte har användning för en
             // array eller lista enligt spec.
             for (int i = 0; i < input; i++) 
