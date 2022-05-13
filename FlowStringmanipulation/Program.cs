@@ -14,12 +14,11 @@ namespace FlowStringmanipulation
                 Console.Clear();
                 Console.WriteLine("Välkommen till BIO");
                 Console.WriteLine("0. Stäng av programmet");
-                Console.WriteLine("1. Köp enskild biljett");
-                // Jag hade haft ETT menyval för biljettköp, om man vill köpa en biljett kan man välja 1 biljett helt enkelt.
-                Console.WriteLine("1b. Köp biljetter för sällskap");
-                // Lite malicious compliance här.
-                // Enligt specifikation ville ni att case 2 skulle vara upprepning så då får sällskapsbiljettköpet hamna osmidigt.
-                // I vanliga fall pratar vi med klienten om detta.
+                Console.WriteLine("1. Köp enskild biljett"); // Jag hade haft ETT menyval för biljettköp,
+                                                             // man vill köpa en biljett kan man välja 1 biljett helt enkelt.
+                Console.WriteLine("1b. Köp biljetter för sällskap"); // Lite malicious compliance här.
+                    // Enligt specifikation ville ni att case 2 skulle vara upprepning så då får sällskapsbiljettköpet hamna osmidigt.
+                    // I vanliga fall pratar vi med klienten om detta.
                 Console.WriteLine("2. Upprepningar");
                 Console.WriteLine("3. Splitta sträng");
                 Console.WriteLine();
@@ -33,8 +32,8 @@ namespace FlowStringmanipulation
                         break;
 
                     case "1":
-                        Console.Clear();
-                        KöpBiljett(); //Egna metoderna finns efter Main-metoden.
+                        Console.Clear(); //Rensa alltid buffern så att endast relevant information visas.
+                        KöpBiljett(); //Våra metoder finns beskrivna efter Main-metoden.
                         VäntaPåAnvändare();
                         break;
 
@@ -51,9 +50,9 @@ namespace FlowStringmanipulation
                         Console.Write("Upprepa: ");
                         string upprepa = Console.ReadLine();
                         int upprepningar = 0;
-                        while (upprepningar < 10)
                         //En loop som lägger till ett heltal i variabeln varje varv tills vi når 9
                         //(börjar räkna från 0 så det blir 10 loopar)
+                        while (upprepningar < 10)
                         {
                             upprepningar++;
                             Console.WriteLine($"{upprepningar}. {upprepa}");
@@ -67,8 +66,8 @@ namespace FlowStringmanipulation
                         {
                             Console.Write("Mening: ");
                             string mening = Console.ReadLine();
-                            string[] ord = mening.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
                             // Vi använder TrimEntries och RemoveEmptyEntries tillsammans för att ta bort whitespace. Tack IntelliSense.
+                            string[] ord = mening.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
                             if (ord.Length < 3)
                             {
                                 Console.WriteLine("Du måste skriva minst tre ord.");
@@ -88,17 +87,16 @@ namespace FlowStringmanipulation
             } while (run);
         }
 
-        static int KöpBiljett()
         //En metod för att köpa biljetter. Den returnerar kostnaden för biljetten så att vi kan använda den
         //som input i en annan metod, metoden Sällskap där vi sammanslår priset för flera biljetter.
+        static int KöpBiljett()
         {
             //Eftersom dessa värden inte behöver vara ändringsbara/variabla i programmet kan vi deklarera dem som konstanter.
             const int ungdomsPris = 80;
             const int pensionärsPris = 90;
             const int standardPris = 120;
             const int barnPris = 0;
-            const int näraDödenPris = 0; // Vi skulle kunna slå ihop denna med barnPris och
-                                          // använda || i if-satsen men detta känns tydligare.
+            const int näraDödenPris = 0; 
             do
             {
                 uint ålderUint = ValideraUINT("Ålder på besökare"); //Vi ser först till att användarens input är ett positiv heltal.
@@ -130,12 +128,14 @@ namespace FlowStringmanipulation
             } while (true);
         }
 
-        static void Sällskap(uint input)
         //Metoden tar emot hur många biljetter som ska köpas, visar detta för kunden tillsammans med kostnaden för alla biljetterna.
+        //Vi skulle kunna bygga in detta i KöpBiljett-metoden, så att den tar emot en integer direkt, förslagsvis med en default
+        //t.ex. KöpBiljett(uint input = 1) men jag 
+        static void Sällskap(uint input)
         {
-            int summa = 0;
             //Vi kan jobba direkt i en heltalsvariabel eftersom vi inte har användning för en
             // array eller lista enligt spec.
+            int summa = 0;
             for (int i = 0; i < input; i++) 
             {
                 summa += KöpBiljett();
@@ -144,26 +144,28 @@ namespace FlowStringmanipulation
             Console.WriteLine($"Total kostnad för sällskapet: {summa}kr");
         }
 
+        //Metoden har som input en sträng som visas där användaren skriver text, d.v.s. vänster om inputbuffern.
+        //Metoden ber sedan användaren om en sträng och konverterar denna till ett positivt heltal.
         static uint ValideraUINT(string inputBuffer)
         {
             do
             {
                 Console.Write($"{inputBuffer}: ");
+                //TryParse returerar en sann boolean om dess input är ett positiv heltal.
                 if (uint.TryParse(Console.ReadLine(), out uint output))
-                //TryParse returerar en sann boolean om dess input är ett positiv heltal
                 {
                     return output;
                 }
-                else
                 //Om input inte är ett positivt heltal så kör vi loopen igen och meddelar användaren om problemet.
+                else
                 {
                     Console.WriteLine("Endast positiva heltal är tillåtna.\n");
                 }
             } while (true);
         }
 
-        static void VäntaPåAnvändare()
         //En enkel metod så att vi kan stanna upp programmet så att användaren hinner konfimera vad som händer.
+        static void VäntaPåAnvändare()
         {
             Console.WriteLine("\nTryck på Enter för att återgå till huvudmenyn.");
             Console.ReadLine();
