@@ -167,7 +167,7 @@ namespace FlowStringmanipulation
         //En enkel metod så att vi kan stanna upp programmet så att användaren hinner konfimera vad som händer.
         static void VäntaPåAnvändare()
         {
-            Console.WriteLine("\nTryck på Enter för att återgå till huvudmenyn.");
+            Console.WriteLine("\nTryck på Enter för fortsätta.");
             Console.ReadLine();
         }
     }
